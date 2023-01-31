@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Player 1</h2>
+		 <table>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</table>
+		<div>
+        <button id="reset">Reset</button></div> 
+</body>
+<script>
+    let player = true;
+let isWinnerWin = true;
+let td = document.getElementsByTagName('td');
+let title = document.querySelector('h2');
+let reset = document.getElementById('reset');
+let winnerCell = [];
+winner();
+
+
+for (let i = 0; i < td.length; i++) {
+  td[i].addEventListener('click', function() {
+    if (this.innerHTML === '' && isWinnerWin) {
+      setImage(i, this);
+    }
+  })
+}
+
+reset.addEventListener('click', function() {
+  winner();
+  player = true;
+  isWinnerWin = true;
+  title.innerHTML = 'Player 1';
+  for (let i = 0; i < td.length; i++) {
+    td[i].innerHTML = '';
+  }
+})
+
+function setImage(index, el) {
+  if (winnerCell.includes(index)) {
+    el.innerHTML = '<img src="images/win.jpg" alt="You win">';
+    isWinnerWin = false;
+    alert('You win...')
+  } else {
+    el.innerHTML = '<img src="images/fail.jpg" alt="You fail">';
+  }
+  if (player) {
+    title.innerHTML = 'Player 2';
+    player = !player;
+  } else {
+    title.innerHTML = 'Player 1';
+    player = !player;
+  }
+}
+
+function winner() {
+  winnerCell = [
+    Math.floor(Math.random() * 25),
+    Math.floor(Math.random() * 25),
+    Math.floor(Math.random() * 25),
+  ];
+}
+
+</script>
+</html>
